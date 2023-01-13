@@ -1,4 +1,4 @@
-module terraform-provider-6connect
+module terraform-provider-provision6connect
 
 go 1.19
 
