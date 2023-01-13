@@ -12,6 +12,6 @@ import (
 //go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --provider-name provision6connect
 func main() {
 	providerserver.Serve(context.Background(), provision6connect.New, providerserver.ServeOpts{
-		Address: "registry.terraform.io/hashicorp/6connect",
+		Address: "registry.terraform.io/providers/6connect/provision6connect",
 	})
 }
