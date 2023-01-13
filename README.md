@@ -1,12 +1,6 @@
 # terraform-provider-provision6connect
 Terraform Provider for 6connect ProVision
 
----
-page_title: "provision6connect Provider"
-subcategory: ""
-description: |-
-  Interact with 6connect ProVision.
----
 
 # provision6connect Provider
 
