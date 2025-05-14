@@ -23,14 +23,14 @@ func New() provider.Provider {
 	return &provision6connectProvider{}
 }
 
-// hashicupsProviderModel maps provider schema data to a Go type.
+// provision6connectProviderModel maps provider schema data to a Go type.
 type provision6connectProviderModel struct {
 	Host     types.String `tfsdk:"host"`
 	Username types.String `tfsdk:"username"`
 	Password types.String `tfsdk:"password"`
 }
 
-// hashicupsProvider is the provider implementation.
+// provision6connectProvider is the provider implementation.
 type provision6connectProvider struct{}
 
 // Metadata returns the provider type name.
@@ -75,27 +75,27 @@ func (p *provision6connectProvider) Configure(ctx context.Context, req provider.
 	if config.Host.IsUnknown() {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("host"),
-			"Unknown HashiCups API Host",
-			"The provider cannot create the HashiCups API client as there is an unknown configuration value for the HashiCups API host. "+
-				"Either target apply the source of the value first, set the value statically in the configuration, or use the HASHICUPS_HOST environment variable.",
+			"Unknown 6connect ProVision Host",
+			"The provider cannot create the 6connect ProVision client as there is an unknown configuration value for the 6connect ProVision host. "+
+				"Either target apply the source of the value first, set the value statically in the configuration, or use the PROVISION_HOST environment variable.",
 		)
 	}
 
 	if config.Username.IsUnknown() {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("username"),
-			"Unknown HashiCups API Username",
-			"The provider cannot create the HashiCups API client as there is an unknown configuration value for the HashiCups API username. "+
-				"Either target apply the source of the value first, set the value statically in the configuration, or use the HASHICUPS_USERNAME environment variable.",
+			"Unknown 6connect ProVision Username",
+			"The provider cannot create the 6connect ProVision client as there is an unknown configuration value for the 6connect ProVision username. "+
+				"Either target apply the source of the value first, set the value statically in the configuration, or use the PROVISION_USERNAME environment variable.",
 		)
 	}
 
 	if config.Password.IsUnknown() {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("password"),
-			"Unknown HashiCups API Password",
-			"The provider cannot create the HashiCups API client as there is an unknown configuration value for the HashiCups API password. "+
-				"Either target apply the source of the value first, set the value statically in the configuration, or use the HASHICUPS_PASSWORD environment variable.",
+			"Unknown 6connect ProVision Password",
+			"The provider cannot create the 6connect ProVision client as there is an unknown configuration value for the 6connect ProVision password. "+
+				"Either target apply the source of the value first, set the value statically in the configuration, or use the PROVISION_PASSWORD environment variable.",
 		)
 	}
 
@@ -128,9 +128,9 @@ func (p *provision6connectProvider) Configure(ctx context.Context, req provider.
 	if host == "" {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("host"),
-			"Missing HashiCups API Host",
-			"The provider cannot create the HashiCups API client as there is a missing or empty value for the HashiCups API host. "+
-				"Set the host value in the configuration or use the HASHICUPS_HOST environment variable. "+
+			"Missing 6connect ProVision Host",
+			"The provider cannot create the 6connect ProVision client as there is a missing or empty value for the 6connect ProVision host. "+
+				"Set the host value in the configuration or use the PROVISION_HOST environment variable. "+
 				"If either is already set, ensure the value is not empty.",
 		)
 	}
@@ -138,9 +138,9 @@ func (p *provision6connectProvider) Configure(ctx context.Context, req provider.
 	if username == "" {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("username"),
-			"Missing HashiCups API Username",
-			"The provider cannot create the HashiCups API client as there is a missing or empty value for the HashiCups API username. "+
-				"Set the username value in the configuration or use the HASHICUPS_USERNAME environment variable. "+
+			"Missing 6connect ProVision Username",
+			"The provider cannot create the 6connect ProVision client as there is a missing or empty value for the 6connect ProVision username. "+
+				"Set the username value in the configuration or use the PROVISION_USERNAME environment variable. "+
 				"If either is already set, ensure the value is not empty.",
 		)
 	}
@@ -148,9 +148,9 @@ func (p *provision6connectProvider) Configure(ctx context.Context, req provider.
 	if password == "" {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("password"),
-			"Missing HashiCups API Password",
-			"The provider cannot create the HashiCups API client as there is a missing or empty value for the HashiCups API password. "+
-				"Set the password value in the configuration or use the HASHICUPS_PASSWORD environment variable. "+
+			"Missing 6connect ProVision Password",
+			"The provider cannot create the 6connect ProVision client as there is a missing or empty value for the 6connect ProVision password. "+
+				"Set the password value in the configuration or use the PROVISION_PASSWORD environment variable. "+
 				"If either is already set, ensure the value is not empty.",
 		)
 	}
@@ -159,19 +159,19 @@ func (p *provision6connectProvider) Configure(ctx context.Context, req provider.
 		return
 	}
 
-	// Create a new HashiCups client using the configuration values
+	// Create a new client using the configuration values
 	client, err := provisionclient.NewClient(host, username, password, true)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Unable to Create HashiCups API Client",
-			"An unexpected error occurred when creating the HashiCups API client. "+
+			"Unable to Create 6connect ProVision Client",
+			"An unexpected error occurred when creating the 6connect ProVision client. "+
 				"If the error is not clear, please contact the provider developers.\n\n"+
-				"HashiCups Client Error: "+err.Error(),
+				"6connect ProVision Client Error: "+err.Error(),
 		)
 		return
 	}
 
-	// Make the HashiCups client available during DataSource and Resource
+	// Make the 6connect ProVision client available during DataSource and Resource
 	// type Configure methods.
 	resp.DataSourceData = client
 	resp.ResourceData = client

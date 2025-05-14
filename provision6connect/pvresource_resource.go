@@ -163,7 +163,7 @@ func (r *pvresourceResource) Read(ctx context.Context, req resource.ReadRequest,
 		return
 	}
 
-	// Get refreshed order value from HashiCups
+	// Get resources value 
 	resources, err := r.client.Resources.GetResources(&map[string]string{
 		"id":              state.ID.ValueString(),
 		"load_attributes": "1",
