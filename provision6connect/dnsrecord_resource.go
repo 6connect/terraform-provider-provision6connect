@@ -169,7 +169,7 @@ func (r *dnsrecordResource) Read(ctx context.Context, req resource.ReadRequest, 
 		return
 	}
 
-	// Get refreshed order value from HashiCups
+	// Get refreshed zone records value
 	records, err := r.client.DNS.GetZoneRecords(state.ZoneID.ValueString(), &map[string]string{
 		"id":              state.ID.ValueString(),
 		"load_attributes": "1",

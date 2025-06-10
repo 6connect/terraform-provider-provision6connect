@@ -242,7 +242,7 @@ func (r *dnszoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 		return
 	}
 
-	// Get refreshed order value from HashiCups
+	// Get refreshed zone
 	zones, err := r.client.DNS.GetZoneByID(state.ID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError(
